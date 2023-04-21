@@ -1,16 +1,18 @@
+const { createUserDB, getUserDB } = require("../controllers/UsersControllers");
 
 // query --> /?name=nicolas&apellido=burgueño
-const getUserHandler = (req,res) => {
-    const { name, apellido } = req.query
-
-    if(name || apellido) 
-    return res
-    .status(200)
-    .send(
-        `The user with name: ${name} and last name: ${apellido}`
-        );
-
-    res.status(200).send("alls users")
+const getUserHandler = async (req,res) => {
+    const { name } = req.query
+    try {
+        if(name){
+            const response = await getUserDB(name)
+            return res.status(200).json(response)
+        }
+        const response = await getUserDB()
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 };
 
 // params --> /:id 
@@ -20,11 +22,14 @@ const getUserIdHandler = (req,res) => {
 };
 
 // --> body
-const postUserHandler = (req,res) => {
-    const { name, email, phone } = req.body 
-    res
-    .status(200)
-    .send(`we create the users witch name: ${name}, email: ${email} and phone: ${phone}`)
+const postUserHandler = async (req,res) => {
+    const { name, email, phone } = req.body;
+    try {
+     const response = await createUserDB(name, email, phone)
+     res.status(200).json(response)   
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 };
 
 module.exports = {
