@@ -1,14 +1,14 @@
-const { createUserDB, getUserDB } = require("../controllers/UsersControllers");
+const { createUserDB, getAllUsers, getUserById } = require("../controllers/usersControllers");
 
 // query --> /?name=nicolas&apellido=burgueño
 const getUserHandler = async (req,res) => {
     const { name } = req.query
     try {
         if(name){
-            const response = await getUserDB(name)
+            const response = await getAllUsers(name)
             return res.status(200).json(response)
         }
-        const response = await getUserDB()
+        const response = await getAllUsers()
         res.status(200).json(response)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -16,9 +16,14 @@ const getUserHandler = async (req,res) => {
 };
 
 // params --> /:id 
-const getUserIdHandler = (req,res) => {
+const getUserIdHandler = async (req,res) => {
     const { id } = req.params;
-    res.status(200).send(`users witch id: ${id}`)
+    try {
+        const response = await getUserById(id)
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 };
 
 // --> body
