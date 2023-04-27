@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("post", {
+    sequelize.define("Posts", {
     id: {
         type: DataTypes.INTEGER,// es un tipo de dato alfanumerico
         autoIncrement: true,
@@ -19,6 +19,6 @@ module.exports = (sequelize) => {
         unique: true,
     },
   }, 
-    { freezeTableName: true, timestamps: false }
+    { timestamps: false }
   );
 };

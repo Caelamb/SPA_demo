@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("user", {
+    sequelize.define("Users", {
     id: {
         type: DataTypes.UUID,// es un tipo de dato alfanumerico
         primaryKey: true,
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
   },
-   { freezeTableName: true, timestamps: false }
+   { timestamps: false }
  );
 };
 

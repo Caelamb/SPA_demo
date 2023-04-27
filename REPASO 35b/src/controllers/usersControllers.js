@@ -1,8 +1,8 @@
-const { user } = require("../db");
+const { Users, Posts } = require("../db");
 const axios = require("axios");
 
 const createUserDB = async (name, email, phone) => {
-    const newUser = await user.create({name, email, phone});
+    const newUser = await Users.create({name, email, phone});
     return newUser; 
 };
 
@@ -21,7 +21,12 @@ const getUserAPI = async () => {
 };
 
 const getUserDB = async () => {
-    const allUsers = await user.findAll();
+    const allUsers = await Users.findAll({
+        include: {
+            model: Posts,
+            attributes: ["title", "body"],
+        }
+    });
     return allUsers;
 };
 
@@ -43,15 +48,20 @@ const getAllUsers = async (name) => {
 
 const getUserById = async (id) => {
 if(isNaN(id)) {
-    const userById = await user.findByPK(id);
+    const userById = await Users.findByPK(id);
     return userById 
  }
  const users = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
  return users.data;
 };
 
+const userDelete = async(id) => {
+    await Users.destroy({ where: { id } })
+};
+
 module.exports = {
     createUserDB,
     getAllUsers,
-    getUserById
+    getUserById,
+    userDelete
 };

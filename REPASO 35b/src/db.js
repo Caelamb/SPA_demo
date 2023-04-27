@@ -7,7 +7,6 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_DIALECT, DB_NAME } = process.env;
 //son los modelos
 const UsersModel = require("./models/Users");
 const PostsModel = require("./models/Posts");
-const Users = require("./models/Users");
 
 const sequelize = new Sequelize(
     `${DB_DIALECT}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`
@@ -16,15 +15,18 @@ const sequelize = new Sequelize(
 UsersModel(sequelize);
 PostsModel(sequelize);
 
-const { user, post } = sequelize.models;
+const { Users , Posts } = sequelize.models;
 
 // creamos las relaciones
 
 //un usuario tiene varios posts
-user.hasMany(post);
+Users.hasMany(Posts, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+});
 
 //un post va a pertenecer a un usuario
-post.hasMany(user);
+Posts.hasMany(Users);
 
 module.exports = {
     ...sequelize.models,

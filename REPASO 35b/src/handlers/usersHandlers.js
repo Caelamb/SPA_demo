@@ -1,4 +1,4 @@
-const { createUserDB, getAllUsers, getUserById } = require("../controllers/usersControllers");
+const { createUserDB, getAllUsers, getUserById, userDelete } = require("../controllers/usersControllers");
 
 // query --> /?name=nicolas&apellido=burgueño
 const getUserHandler = async (req,res) => {
@@ -37,8 +37,19 @@ const postUserHandler = async (req,res) => {
     }
 };
 
+const deleteUserHandler = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await userDelete(id)
+        res.status(200).send("Users elimited")
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+};
+
 module.exports = {
     getUserHandler,
     getUserIdHandler,
-    postUserHandler
+    postUserHandler,
+    deleteUserHandler
 };
