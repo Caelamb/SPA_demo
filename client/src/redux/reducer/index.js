@@ -1,7 +1,7 @@
 import {GET_USERS} from "../actions";
 
 let initialState = {
-    allUsers: {}
+    allUsers: []
 };
 
 const rootReducer = (state=initialState, action) => {
