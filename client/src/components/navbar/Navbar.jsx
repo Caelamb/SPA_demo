@@ -4,7 +4,10 @@ import styles from "../../components/navbar/navbar.module.css";
 const Navbar = () => {
   return (
     <div className={styles.navbar}>
-      <p>NAVBAR</p>
+      <form>
+        <input placeholder='Busqueda...'/>
+        <button>Buscar</button>
+      </form>
     </div>
   )
 }
