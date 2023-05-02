@@ -6,10 +6,10 @@ const Cards = ({ allUsers }) => {
   return (
     <div className={styles['card-container']}>
       { allUsers?.map(user => (
-       <Card key={user.id} user={user}/> 
+       <Card classname={styles.card} key={user.id} user={user}/> 
       ))}
     </div>
   )
 }
 
-export default Cards
+export default Cards;

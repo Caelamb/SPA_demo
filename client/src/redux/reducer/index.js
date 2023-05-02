@@ -1,7 +1,9 @@
-import {GET_USERS} from "../actions";
+import {GET_USERS, GET_BY_NAME} from "../actions";
 
 let initialState = {
-    allUsers: []
+    allUsers: [],
+    usersCopy: [],
+    posts: []
 };
 
 const rootReducer = (state=initialState, action) => {
@@ -10,7 +12,14 @@ const rootReducer = (state=initialState, action) => {
             return {
                 ...state,//siempre devolver todo el estado y despues modificar lo que queramos
                 allUsers: action.payload,
-            }
+                usersCopy: action.payload
+            };
+            case GET_BY_NAME:
+                return {
+                    ...state,
+                    allUsers: action.payload,
+                    usersCopy: action.payload
+                }
         default:
             return state; 
     }
