@@ -1,24 +1,23 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("Posts", {
-    id: {
-        type: DataTypes.INTEGER,// es un tipo de dato alfanumerico
+  sequelize.define(
+    "post",
+    {
+      id: {
+        type: DataTypes.INTEGER, // ES ALFANUMERICO  ASDASDADAS4848-GF464565-ASDAS5
         autoIncrement: true,
         primaryKey: true,
-    },
-
-    tittle: {
+      },
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-
-    body: {
+      },
+      body: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+      },
     },
-  }, 
-    { timestamps: false }
+    { freezeTableName: true, timestamps: false }
   );
 };

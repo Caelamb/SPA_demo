@@ -1,17 +1,17 @@
-const { Posts } = require("../db");
+const { post } = require("../db");
 
-const getPots = async () => {
-    const post = await Posts.findAll()
-    return post;
+const getPosts = async () => {
+  const posts = await post.findAll();
+  return posts;
 };
 
-const createPostDB = async (title, body, UserId) => {
-    const posts = await Posts.create({ body, title});
-    await posts.setUser(UserId)
-    return posts;
+const createPostDB = async (title, body, userId) => {
+  const posts = await post.create({ body, title });
+  await posts.setUser(userId);
+  return posts;
 };
 
 module.exports = {
-    createPostDB,
-    getPots
+  createPostDB,
+  getPosts,
 };

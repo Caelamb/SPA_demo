@@ -15,7 +15,7 @@ export const getUsers = () => {
 
 export const getByName = (name) => {
     return async (dispatch) => {
-        const response = (await axios.get(`http://localhost:3000/users/?name=${name}`)).data;
+        const response = (await axios.get(`http://localhost:3001/users/?name=${name}`)).data;
         return dispatch({
             type: "GET_BY_NAME",
             payload: response

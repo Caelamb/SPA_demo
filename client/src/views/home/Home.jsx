@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allUsers = useSelector((state) => state.allUsers);
-  const [ searcString, setsearchString ] = useState("");
+  const allUsers = useSelector((state) => state.allUsers); // Estados globales
+  const [ searcString, setsearchString ] = useState("");// Estados locales
   
   
   useEffect(() => {
