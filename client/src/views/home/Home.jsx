@@ -1,52 +1,58 @@
-import React, { useEffect, useState } from 'react'
-import styles from "./home.module.css";
+import "./home.css";
 
-import Navbar from "../../components/navbar/Navbar";
-import Cards from '../../components/cards/Cards';
-
-import { getByName, getUsers } from '../../redux/actions'; 
+import React, { useEffect, useState } from "react";
+import { getByName, getUsers } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+
+import Cards from "../../components/cards/Cards";
+import Navbar from "../../components/navbar/Navbar";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allUsers = useSelector((state) => state.allUsers); // Estados globales
-  const [ searcString, setsearchString ] = useState("");// Estados locales
-  
-  
+  const allUsers = useSelector((state) => state.allUsers); //estados globales
+  const [searchString, setsearchString] = useState(""); //estados locales
+
   useEffect(() => {
     dispatch(getUsers());
-  }, [dispatch])
+  }, [dispatch]);
 
-  //FILTRO POR EL BACKEND
-  
-  const handleChange = (event) => {
-    event.preventDefault()
-    setsearchString(event.target.value)
+  //* filtro por el backend
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setsearchString(e.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    dispatch(getByName(searcString))
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getByName(searchString));
   };
 
-  //FILTRO POR ESTADO
-  
-  /*const [ filtered, setFiltered ] = useState(allUsers);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const filtered = allUsers.filter((user) => user.name.toLowerCase().includes(searcString.toLowerCase()));
-    setFiltered(filtered);
-  };*/
-  
+  //* filtro por estado
+  // const [filtered, setFiltered] = useState(allUsers);
+  // const [searchString, setsearchString] = useState("");
+
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   setsearchString(e.target.value);
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const filtered = allUsers.filter((user) =>
+  //     user.name.toLowerCase().includes(searchString.toLowerCase())
+  //   );
+  //   setFiltered(filtered);
+  // };
 
   return (
-    <div className={styles.container}>
-      <p className={styles.heading}>soy el home</p>
-      <Navbar handleChange={handleChange} handleSubmit={handleSubmit}/>
+    <div className="home-title">
+      <h2 className="home">Home</h2>
+      <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
+      {/* <Cards allUsers={filtered} /> */}
       <Cards allUsers={allUsers} />
-     { /*<Cards allUsers={filtered} />*/}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

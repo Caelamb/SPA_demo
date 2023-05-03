@@ -1,17 +1,21 @@
-import React from 'react'
+import "./card.css";
+
 import { Link } from "react-router-dom";
-import styles from "../../components/card/card.module.css";
+import React from "react";
 
 const Card = ({ user }) => {
   return (
-    <div className = {styles.container}>
-      <Link to={`/detail/${user.id}`}>
-      <h3 className = {styles.name}>{user.name}</h3>
-      <p className = {styles.email}>{user.email}</p>
-      <p className = {styles.phone}>{user.phone}</p>
+    <div className="card-container">
+      <Link
+        to={`/detail/${user.id}`}
+        style={{ textDecoration: "none", color: "#0ccac4" }}
+      >
+        <h3>{user.name}</h3>
+        <p>{user.email}</p>
+        <p>{user.phone}</p>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
